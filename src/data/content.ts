@@ -1,0 +1,120 @@
+export const profiles = [
+  {
+    id: 1,
+    name: 'QUEEN',
+    avatar: 'https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?w=200&h=200&fit=crop',
+    color: '#e50914',
+  },
+  {
+    id: 2,
+    name: '18th Birthdayy',
+    avatar: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?w=200&h=200&fit=crop',
+    color: '#ff6b35',
+  },
+  {
+    id: 3,
+    name: 'Riuuuu',
+    avatar: 'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?w=200&h=200&fit=crop',
+    color: '#c0392b',
+  },
+  {
+    id: 4,
+    name: 'US',
+    avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?w=200&h=200&fit=crop',
+    color: '#922b21',
+  },
+];
+
+export const featuredFilms = [
+  {
+    id: 1,
+    title: 'ETERNAL LOVE',
+    genre: 'Romance Drama',
+    year: '2024',
+    rating: '9.2',
+    duration: '2h 49m',
+    description: 'A journey through time and space where your beauty becomes the only light in my universe.',
+    image: 'https://images.pexels.com/photos/1169754/pexels-photo-1169754.jpeg?w=800&h=500&fit=crop',
+    wide: 'https://images.pexels.com/photos/1169754/pexels-photo-1169754.jpeg?w=1600&h=900&fit=crop',
+    tags: ['FEATURED', 'TOP 10'],
+  },
+  {
+    id: 2,
+    title: 'HEARTBEAT SYMPHONY',
+    genre: 'Romantic Drama',
+    year: '2024',
+    rating: '8.7',
+    duration: '2h 12m',
+    description: 'Every moment with you is a melody that echoes through my soul, creating a masterpiece of pure emotion.',
+    image: 'https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?w=800&h=500&fit=crop',
+    wide: 'https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?w=1600&h=900&fit=crop',
+    tags: ['NEW', 'AWARD WINNER'],
+  },
+  {
+    id: 3,
+    title: 'GOLDEN MOMENT',
+    genre: 'Romance Fantasy',
+    year: '2024',
+    rating: '8.9',
+    duration: '1h 58m',
+    description: 'In a world of endless possibilities, meeting you was the most beautiful moment of my life.',
+    image: 'https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?w=800&h=500&fit=crop',
+    wide: 'https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?w=1600&h=900&fit=crop',
+    tags: ['TRENDING'],
+  },
+  {
+    id: 4,
+    title: 'STARLIGHT FOREVER',
+    genre: 'Romantic Fantasy',
+    year: '2024',
+    rating: '8.4',
+    duration: '1h 42m',
+    description: 'You are my constellation, my guiding light, my reason for believing in forever.',
+    image: 'https://images.pexels.com/photos/3617500/pexels-photo-3617500.jpeg?w=800&h=500&fit=crop',
+    wide: 'https://images.pexels.com/photos/3617500/pexels-photo-3617500.jpeg?w=1600&h=900&fit=crop',
+    tags: ['EMOTIONAL'],
+  },
+  {
+    id: 5,
+    title: 'SOULMATE DESTINY',
+    genre: 'Epic Romance',
+    year: '2024',
+    rating: '9.0',
+    duration: '3h 05m',
+    description: 'Against all odds, we found each other. Now nothing in the universe could tear us apart.',
+    image: 'https://images.pexels.com/photos/2166456/pexels-photo-2166456.jpeg?w=800&h=500&fit=crop',
+    wide: 'https://images.pexels.com/photos/2166456/pexels-photo-2166456.jpeg?w=1600&h=900&fit=crop',
+    tags: ['EPIC', 'TOP 10'],
+  },
+];
+
+export const galleryImages = [
+  { id: 1, src: 'https://images.pexels.com/photos/1476321/pexels-photo-1476321.jpeg?w=600&h=400&fit=crop', label: 'Your Smile' },
+  { id: 2, src: 'https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?w=600&h=400&fit=crop', label: 'Beautiful You' },
+  { id: 3, src: 'https://images.pexels.com/photos/1831234/pexels-photo-1831234.jpeg?w=600&h=400&fit=crop', label: 'Pure Magic' },
+  { id: 4, src: 'https://images.pexels.com/photos/3075993/pexels-photo-3075993.jpeg?w=600&h=400&fit=crop', label: 'Radiant Glow' },
+  { id: 5, src: 'https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?w=600&h=400&fit=crop', label: 'My Favorite' },
+  { id: 6, src: 'https://images.pexels.com/photos/1910225/pexels-photo-1910225.jpeg?w=600&h=400&fit=crop', label: 'Forever Yours' },
+  { id: 7, src: 'https://images.pexels.com/photos/1579654/pexels-photo-1579654.jpeg?w=600&h=400&fit=crop', label: 'Golden Hour' },
+  { id: 8, src: 'https://images.pexels.com/photos/3015996/pexels-photo-3015996.jpeg?w=600&h=400&fit=crop', label: 'Moonlit Dreams' },
+  { id: 9, src: 'https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?w=600&h=400&fit=crop', label: 'Delicate Touch' },
+  { id: 10, src: 'https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?w=600&h=400&fit=crop', label: 'Soft Glow' },
+];
+
+export const timelineEvents = [
+  { year: 'Day 1', title: 'The First Moment', desc: 'Before you, there was darkness. Then: a single glance that changed everything forever.' },
+  { year: 'Day 100', title: 'Falling Deep', desc: 'Every day with you became more beautiful. The love evolved — becoming something new, something electric, something alive.' },
+  { year: 'Day 365', title: 'A Year of Magic', desc: 'Distance couldn\'t stop us. Every moment together felt like eternity. Our love reached every corner of my soul.' },
+  { year: 'Day 1000', title: 'Infinite Love', desc: 'Endless kisses, endless smiles. Infinite moments. Your love became my identity. You became my world.' },
+  { year: 'Day 2000', title: 'Forever Starts', desc: 'You became my everything — my reason, my dream, my purpose. With you, forever doesn\'t feel like enough.' },
+  { year: 'Today', title: 'Our Love Story', desc: 'This is our forever. Not just a moment in time, but an eternal journey together. I love you infinitely.' },
+];
+
+export const credits = [
+  { role: 'STAR OF THE SHOW', name: 'You — My Love' },
+  { role: 'HEART & SOUL', name: 'Your Beautiful Spirit' },
+  { role: 'INSPIRATION', name: 'Your Smile & Laughter' },
+  { role: 'CINEMATOGRAPHY', name: 'Every Moment With You' },
+  { role: 'SOUNDTRACK', name: 'Beating of My Heart' },
+  { role: 'WITH ETERNAL LOVE', name: 'Forever Yours' },
+];

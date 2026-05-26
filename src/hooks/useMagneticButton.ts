@@ -1,32 +1,48 @@
 import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
 
 export function useMagneticButton(strength = 0.4) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(hover: none)').matches;
+    if (!el || isTouchDevice) return;
+
+    let rafId = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    const updateTransform = () => {
+      if (el) {
+        el.style.transform = `translate(${targetX}px, ${targetY}px)`;
+      }
+      rafId = requestAnimationFrame(updateTransform);
+    };
 
     const onMove = (e: MouseEvent) => {
       const rect = el.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
-      const dx = (e.clientX - cx) * strength;
-      const dy = (e.clientY - cy) * strength;
-      gsap.to(el, { x: dx, y: dy, duration: 0.4, ease: 'power3.out' });
+      targetX = (e.clientX - cx) * strength;
+      targetY = (e.clientY - cy) * strength;
     };
 
     const onLeave = () => {
-      gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
+      targetX = 0;
+      targetY = 0;
     };
 
     el.addEventListener('mousemove', onMove);
     el.addEventListener('mouseleave', onLeave);
+    rafId = requestAnimationFrame(updateTransform);
 
     return () => {
+      cancelAnimationFrame(rafId);
       el.removeEventListener('mousemove', onMove);
       el.removeEventListener('mouseleave', onLeave);
+      if (el) {
+        el.style.transform = '';
+      }
     };
   }, [strength]);
 

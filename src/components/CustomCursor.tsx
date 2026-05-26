@@ -7,21 +7,27 @@ export default function CustomCursor() {
   const [isClicking, setIsClicking] = useState(false);
   const pos = useRef({ x: 0, y: 0 });
   const trailPos = useRef({ x: 0, y: 0 });
+  const hoverRef = useRef(false);
   const rafId = useRef<number>(0);
 
   useEffect(() => {
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(hover: none)').matches;
+    if (isTouchDevice) {
+      return;
+    }
+
     const onMove = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY };
+      const target = e.target as HTMLElement;
+      const isInteractive = !!target.closest('button, a, [data-hover], input, textarea, select');
+      if (isInteractive !== hoverRef.current) {
+        hoverRef.current = isInteractive;
+        setIsHovering(isInteractive);
+      }
     };
 
     const onDown = () => setIsClicking(true);
     const onUp = () => setIsClicking(false);
-
-    const checkHover = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const isInteractive = target.closest('button, a, [data-hover], input, textarea, select');
-      setIsHovering(!!isInteractive);
-    };
 
     const animate = () => {
       if (cursorRef.current) {
@@ -37,14 +43,12 @@ export default function CustomCursor() {
     };
 
     window.addEventListener('mousemove', onMove);
-    window.addEventListener('mousemove', checkHover);
     window.addEventListener('mousedown', onDown);
     window.addEventListener('mouseup', onUp);
     rafId.current = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('mousemove', checkHover);
       window.removeEventListener('mousedown', onDown);
       window.removeEventListener('mouseup', onUp);
       cancelAnimationFrame(rafId.current);
@@ -53,7 +57,6 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Trail */}
       <div
         ref={trailRef}
         className="fixed top-0 left-0 w-10 h-10 pointer-events-none z-[99998] will-change-transform"
@@ -66,7 +69,6 @@ export default function CustomCursor() {
           boxShadow: isHovering ? '0 0 20px rgba(229,9,20,0.5)' : '0 0 8px rgba(229,9,20,0.2)',
         }}
       />
-      {/* Dot */}
       <div
         ref={cursorRef}
         className="fixed top-0 left-0 pointer-events-none z-[99999] will-change-transform"

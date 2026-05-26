@@ -17,6 +17,14 @@ export default function ParticleField() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const pointerFine = window.matchMedia('(pointer: fine)').matches;
+    if (!pointerFine || prefersReducedMotion) {
+      canvas.style.display = 'none';
+      return;
+    }
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -28,52 +36,55 @@ export default function ParticleField() {
     const particles: Particle[] = [];
     const streaks: { x: number; y: number; len: number; speed: number; alpha: number; angle: number }[] = [];
 
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 35; i++) {
       particles.push(createParticle(W, H));
     }
 
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 6; i++) {
       streaks.push({
         x: Math.random() * W,
         y: Math.random() * H,
-        len: 80 + Math.random() * 200,
-        speed: 1 + Math.random() * 3,
-        alpha: 0.1 + Math.random() * 0.3,
-        angle: -0.2 + Math.random() * 0.1,
+        len: 100 + Math.random() * 120,
+        speed: 0.8 + Math.random() * 1.5,
+        alpha: 0.08 + Math.random() * 0.2,
+        angle: -0.15 + Math.random() * 0.08,
       });
     }
 
     function createParticle(w: number, h: number): Particle {
-      const maxLife = 100 + Math.random() * 200;
+      const maxLife = 120 + Math.random() * 180;
       return {
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: -0.1 - Math.random() * 0.4,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: -0.1 - Math.random() * 0.25,
         alpha: 0,
-        size: 0.5 + Math.random() * 2,
+        size: 0.5 + Math.random() * 1.6,
         life: 0,
         maxLife,
       };
     }
 
+    const context = ctx;
     let rafId: number;
 
     function draw() {
-      ctx!.clearRect(0, 0, W, H);
+      context.clearRect(0, 0, W, H);
 
-      // Streaks
       streaks.forEach((s) => {
-        const grad = ctx!.createLinearGradient(s.x, s.y, s.x + Math.cos(s.angle) * s.len, s.y + Math.sin(s.angle) * s.len);
-        grad.addColorStop(0, `rgba(229,9,20,0)`);
+        const x2 = s.x + Math.cos(s.angle) * s.len;
+        const y2 = s.y + Math.sin(s.angle) * s.len;
+        const grad = context.createLinearGradient(s.x, s.y, x2, y2);
+        grad.addColorStop(0, 'rgba(229,9,20,0)');
         grad.addColorStop(0.5, `rgba(229,9,20,${s.alpha})`);
-        grad.addColorStop(1, `rgba(229,9,20,0)`);
-        ctx!.beginPath();
-        ctx!.strokeStyle = grad;
-        ctx!.lineWidth = 1;
-        ctx!.moveTo(s.x, s.y);
-        ctx!.lineTo(s.x + Math.cos(s.angle) * s.len, s.y + Math.sin(s.angle) * s.len);
-        ctx!.stroke();
+        grad.addColorStop(1, 'rgba(229,9,20,0)');
+        context.beginPath();
+        context.strokeStyle = grad;
+        context.lineWidth = 1;
+        context.moveTo(s.x, s.y);
+        context.lineTo(x2, y2);
+        context.stroke();
+
         s.x -= s.speed * 0.3;
         s.y -= s.speed;
         if (s.y + s.len < 0) {
@@ -82,22 +93,21 @@ export default function ParticleField() {
         }
       });
 
-      // Particles
-      particles.forEach((p, i) => {
-        p.life++;
+      particles.forEach((p, index) => {
+        p.life += 1;
         p.x += p.vx;
         p.y += p.vy;
         const progress = p.life / p.maxLife;
         p.alpha = progress < 0.2 ? progress / 0.2 : progress > 0.8 ? (1 - progress) / 0.2 : 1;
-        p.alpha *= 0.6;
+        p.alpha *= 0.55;
 
-        ctx!.beginPath();
-        ctx!.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx!.fillStyle = `rgba(229,9,20,${p.alpha})`;
-        ctx!.fill();
+        context.beginPath();
+        context.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        context.fillStyle = `rgba(229,9,20,${p.alpha})`;
+        context.fill();
 
         if (p.life >= p.maxLife) {
-          particles[i] = createParticle(W, H);
+          particles[index] = createParticle(W, H);
         }
       });
 
@@ -124,7 +134,7 @@ export default function ParticleField() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-[1]"
-      style={{ opacity: 0.8 }}
+      style={{ opacity: 0.75 }}
     />
   );
 }

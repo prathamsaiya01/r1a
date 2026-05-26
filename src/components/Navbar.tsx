@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { Search, Bell } from 'lucide-react';
 
 type NavbarProps = {
-  currentPage: 'home' | 'loveNotes';
-  onNavigate: (page: 'home' | 'loveNotes') => void;
+  currentPage: 'home' | 'loveNotes' | 'birthday' | 'us';
+  onNavigate: (page: 'home' | 'loveNotes' | 'birthday' | 'us') => void;
 };
 
 export default function Navbar({ currentPage, onNavigate }: NavbarProps) {

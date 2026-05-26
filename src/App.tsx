@@ -15,11 +15,13 @@ import GallerySection from './components/GallerySection';
 import CreditsSection from './components/CreditsSection';
 import TimelineSection from './components/TimelineSection';
 import LoveNotesPage from './components/LoveNotesPage';
+import BirthdayPage from './components/BirthdayPage';
+import USPage from './components/USPage';
 import AdminPanel from './components/AdminPanel';
 import { galleryImages, profiles } from './data/content';
 
 type Stage = 'intro' | 'profile' | 'main';
-type Page = 'home' | 'loveNotes';
+type Page = 'home' | 'loveNotes' | 'birthday' | 'us';
 
 type GalleryItem = {
   id: number;
@@ -83,6 +85,15 @@ export default function App() {
   const handleProfileSelect = (profile: typeof profiles[0]) => {
     setSelectedProfile(profile);
     setStage('main');
+    // If 18th Birthday profile selected (id:2), open birthday page
+    if (profile.id === 2) {
+      setPage('birthday');
+    } else if (profile.id === 4) {
+      // If US profile selected (id:4), open US quiz page
+      setPage('us');
+    } else {
+      setPage('home');
+    }
   };
 
   // Lock scroll during intro/profile stages
@@ -151,9 +162,13 @@ export default function App() {
                 <CreditsSection />
                 <AdminPanel items={galleryItems} onAddItem={addGalleryItem} onRemoveItem={removeGalleryItem} />
               </>
-            ) : (
+            ) : page === 'loveNotes' ? (
               <LoveNotesPage onBack={() => setPage('home')} />
-            )}
+            ) : page === 'birthday' ? (
+              <BirthdayPage onBack={() => setPage('home')} />
+            ) : page === 'us' ? (
+              <USPage onBack={() => setPage('home')} />
+            ) : null}
           </motion.div>
         )}
       </AnimatePresence>

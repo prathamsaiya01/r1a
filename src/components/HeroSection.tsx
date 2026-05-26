@@ -59,8 +59,8 @@ export default function HeroSection() {
       {/* Background image with parallax handled by GSAP in parent */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.pexels.com/photos/1169754/pexels-photo-1169754.jpeg?w=1920&h=1080&fit=crop"
-          alt="hero"
+          src="/images/1.jpeg"
+          alt="Eternal Love cover"
           className="w-full h-full object-cover scale-110"
           decoding="async"
           style={{ filter: 'brightness(0.35) saturate(0.7)' }}

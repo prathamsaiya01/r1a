@@ -2,7 +2,7 @@ export const profiles = [
   {
     id: 1,
     name: 'QUEEN',
-    avatar: '/images/4.jpeg',
+    avatar: '/images/5.jpeg',
     color: '#e50914',
   },
   {

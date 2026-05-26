@@ -14,10 +14,12 @@ import ShowcaseSection from './components/ShowcaseSection';
 import GallerySection from './components/GallerySection';
 import CreditsSection from './components/CreditsSection';
 import TimelineSection from './components/TimelineSection';
+import LoveNotesPage from './components/LoveNotesPage';
 import AdminPanel from './components/AdminPanel';
 import { galleryImages, profiles } from './data/content';
 
 type Stage = 'intro' | 'profile' | 'main';
+type Page = 'home' | 'loveNotes';
 
 type GalleryItem = {
   id: number;
@@ -31,6 +33,7 @@ type GalleryItem = {
 export default function App() {
   const [unlocked, setUnlocked] = useState(false);
   const [stage, setStage] = useState<Stage>('intro');
+  const [page, setPage] = useState<Page>('home');
   const [selectedProfile, setSelectedProfile] = useState<typeof profiles[0] | null>(null);
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>(() => {
     const saved = typeof window !== 'undefined' ? window.localStorage.getItem('ria-gallery-items') : null;
@@ -138,13 +141,19 @@ export default function App() {
               </motion.div>
             )}
 
-            <Navbar />
-            <HeroSection />
-            <ShowcaseSection />
-            <GallerySection items={galleryItems} />
-            <TimelineSection />
-            <CreditsSection />
-            <AdminPanel items={galleryItems} onAddItem={addGalleryItem} onRemoveItem={removeGalleryItem} />
+            <Navbar currentPage={page} onNavigate={(target) => setPage(target)} />
+            {page === 'home' ? (
+              <>
+                <HeroSection />
+                <ShowcaseSection />
+                <GallerySection items={galleryItems} />
+                <TimelineSection />
+                <CreditsSection />
+                <AdminPanel items={galleryItems} onAddItem={addGalleryItem} onRemoveItem={removeGalleryItem} />
+              </>
+            ) : (
+              <LoveNotesPage onBack={() => setPage('home')} />
+            )}
           </motion.div>
         )}
       </AnimatePresence>

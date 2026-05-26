@@ -89,22 +89,22 @@ export const featuredFilms = [
 ];
 
 export const galleryImages = [
-  { id: 1, src: 'https://images.pexels.com/photos/1476321/pexels-photo-1476321.jpeg?w=600&h=400&fit=crop', label: 'Your Smile' },
-  { id: 2, src: 'https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?w=600&h=400&fit=crop', label: 'Beautiful You' },
-  { id: 3, src: 'https://images.pexels.com/photos/1831234/pexels-photo-1831234.jpeg?w=600&h=400&fit=crop', label: 'Pure Magic' },
-  { id: 4, src: 'https://images.pexels.com/photos/3075993/pexels-photo-3075993.jpeg?w=600&h=400&fit=crop', label: 'Radiant Glow' },
-  { id: 5, src: 'https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?w=600&h=400&fit=crop', label: 'My Favorite' },
-  { id: 6, src: 'https://images.pexels.com/photos/1910225/pexels-photo-1910225.jpeg?w=600&h=400&fit=crop', label: 'Forever Yours' },
-  { id: 7, src: 'https://images.pexels.com/photos/1579654/pexels-photo-1579654.jpeg?w=600&h=400&fit=crop', label: 'Golden Hour' },
-  { id: 8, src: 'https://images.pexels.com/photos/3015996/pexels-photo-3015996.jpeg?w=600&h=400&fit=crop', label: 'Moonlit Dreams' },
-  { id: 9, src: 'https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?w=600&h=400&fit=crop', label: 'Delicate Touch' },
-  { id: 10, src: 'https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?w=600&h=400&fit=crop', label: 'Soft Glow' },
+  { id: 1, src: '/images/1.jpeg', label: 'Your Smile' },
+  { id: 2, src: '/images/2.jpeg', label: 'Beautiful You' },
+  { id: 3, src: '/images/3.jpeg', label: 'Pure Magic' },
+  { id: 4, src: '/images/4.jpeg', label: 'Radiant Glow' },
+  { id: 5, src: '/images/5.jpeg', label: 'My Favorite' },
+  { id: 6, src: '/images/6.jpeg', label: 'Forever Yours' },
+  { id: 7, src: '/images/7.jpeg', label: 'Golden Hour' },
+  { id: 8, src: '/images/8.jpeg', label: 'Moonlit Dreams' },
+  { id: 9, src: '/images/9.jpeg', label: 'Delicate Touch' },
+  { id: 10, src: '/images/10.jpeg', label: 'Soft Glow' },
 ];
 
 export const timelineEvents = [
-  { year: 'Day 1', title: 'The First Moment', desc: 'Before you, there was darkness. Then: a single glance that changed everything forever.' },
-  { year: 'Day 100', title: 'Falling Deep', desc: 'Every day with you became more beautiful. The love evolved — becoming something new, something electric, something alive.' },
-  { year: 'Day 365', title: 'A Year of Magic', desc: 'Distance couldn\'t stop us. Every moment together felt like eternity. Our love reached every corner of my soul.' },
+  { year: 'Day 1', title: 'The First Moment', desc: "Well you won't remember this, but I still do when I asked you whether there were any extra railways concession forms; though I don't consider this as a good convo between us. So Day 1 would be rather be the interaction between us, when we had to pitch for student councils, Ms. LR!" },
+  { year: 'Day 100', title: 'Falling Deep', desc: "Falling deeply in friendship or love? Well this was a Question in my mind, I thought that the best that would happen was ki become bestfriends, but destiny and God had greatest, sweetest and best plans out of them, falling in love!" },
+  { year: 'Day X', title: 'A Year of Magic', desc: "Well, closeness increased, SPERUM broughy us closer; and then the most unexpected thing- vacation which made you like me. One random day, madam indirectly shared a post hinting about love, for which I got so damn excited, is Ria falling for me, does she like me? The most interesting thing for me!" },
   { year: 'Day 1000', title: 'Infinite Love', desc: 'Endless kisses, endless smiles. Infinite moments. Your love became my identity. You became my world.' },
   { year: 'Day 2000', title: 'Forever Starts', desc: 'You became my everything — my reason, my dream, my purpose. With you, forever doesn\'t feel like enough.' },
   { year: 'Today', title: 'Our Love Story', desc: 'This is our forever. Not just a moment in time, but an eternal journey together. I love you infinitely.' },

@@ -2,7 +2,12 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Bell } from 'lucide-react';
 
-export default function Navbar() {
+type NavbarProps = {
+  currentPage: 'home' | 'loveNotes';
+  onNavigate: (page: 'home' | 'loveNotes') => void;
+};
+
+export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -11,7 +16,13 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navLinks = ['Home', 'Memories', 'Moments', 'Love Notes', 'Favorites'];
+  const navItems = [
+    { label: 'Home', action: 'home' as const },
+    { label: 'Memories', action: 'home' as const },
+    { label: 'Moments', action: 'home' as const },
+    { label: 'Love Notes', action: 'loveNotes' as const },
+    { label: 'Favorites', action: 'home' as const },
+  ];
 
   return (
     <motion.nav
@@ -23,7 +34,7 @@ export default function Navbar() {
       }}
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, delay: 2.5, ease: 'power3.out' }}
+      transition={{ duration: 0.8, delay: 2.5 }}
     >
       {/* Logo */}
       <div className="flex items-center gap-8">
@@ -32,20 +43,24 @@ export default function Navbar() {
         </span>
 
         <div className="hidden md:flex items-center gap-6">
-          {navLinks.map((link, i) => (
-            <motion.a
-              key={link}
-              href="#"
-              data-hover
-              className="font-cinzel text-xs tracking-widest uppercase text-white/60 hover:text-white transition-colors duration-200 relative group"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.6 + i * 0.05, ease: 'easeOut' }}
-            >
-              {link}
-              <span className="absolute bottom-0 left-0 w-0 h-px bg-red-600 group-hover:w-full transition-all duration-200" />
-            </motion.a>
-          ))}
+          {navItems.map((item, i) => {
+            const isActive = currentPage === item.action;
+            return (
+              <motion.button
+                key={item.label}
+                type="button"
+                onClick={() => onNavigate(item.action)}
+                data-hover
+                className={`font-cinzel text-xs tracking-widest uppercase transition-colors duration-200 relative group ${isActive ? 'text-white' : 'text-white/60 hover:text-white'}`}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2.6 + i * 0.05 }}
+              >
+                {item.label}
+                <span className="absolute bottom-0 left-0 w-0 h-px bg-red-600 group-hover:w-full transition-all duration-200" />
+              </motion.button>
+            );
+          })}
         </div>
       </div>
 

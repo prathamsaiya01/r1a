@@ -16,6 +16,11 @@ export default function ShowcaseSection() {
     const section = sectionRef.current;
     if (!track || !section) return;
 
+    // Respect reduced motion and only enable heavy pinning on large screens
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isLargeScreen = window.innerWidth >= 1024;
+    if (prefersReducedMotion || !isLargeScreen) return;
+
     const scrollAmount = track.scrollWidth - track.clientWidth;
 
     const ctx = gsap.context(() => {

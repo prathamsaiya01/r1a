@@ -2,25 +2,25 @@ export const profiles = [
   {
     id: 1,
     name: 'QUEEN',
-    avatar: 'https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?w=200&h=200&fit=crop',
+    avatar: '/images/4.jpeg',
     color: '#e50914',
   },
   {
     id: 2,
     name: '18th Birthdayy',
-    avatar: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?w=200&h=200&fit=crop',
+    avatar: '/images/18.jpeg',
     color: '#ff6b35',
   },
   {
     id: 3,
     name: 'Riuuuu',
-    avatar: 'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?w=200&h=200&fit=crop',
+    avatar: '/images/19.jpeg',
     color: '#c0392b',
   },
   {
     id: 4,
     name: 'US',
-    avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?w=200&h=200&fit=crop',
+    avatar: '/images/2.jpeg',
     color: '#922b21',
   },
 ];

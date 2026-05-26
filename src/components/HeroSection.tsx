@@ -62,6 +62,7 @@ export default function HeroSection() {
           src="https://images.pexels.com/photos/1169754/pexels-photo-1169754.jpeg?w=1920&h=1080&fit=crop"
           alt="hero"
           className="w-full h-full object-cover scale-110"
+          decoding="async"
           style={{ filter: 'brightness(0.35) saturate(0.7)' }}
           id="hero-bg"
         />

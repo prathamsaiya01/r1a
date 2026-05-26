@@ -84,8 +84,11 @@ export default function GallerySection({ items }: Props) {
               <img
                 src={img.src}
                 alt={img.label}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 style={{ filter: 'brightness(0.7) saturate(0.8)' }}
+                loading="lazy"
+                decoding="async"
+                fetchPriority="low"
               />
             ) : (
               <video

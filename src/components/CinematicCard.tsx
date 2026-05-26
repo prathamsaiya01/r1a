@@ -67,7 +67,10 @@ export default function CinematicCard({ film, index }: Props) {
           <img
             src={film.image}
             alt={film.title}
-            className="w-full h-full object-cover transition-transform duration-700"
+            className="w-full h-full object-cover transition-transform duration-300"
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
             style={{ transform: hovered ? 'scale(1.1)' : 'scale(1)' }}
           />
           {/* Overlay */}

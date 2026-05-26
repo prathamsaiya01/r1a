@@ -43,22 +43,19 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
         </span>
 
         <div className="hidden md:flex items-center gap-6">
-          {navItems.map((item, i) => {
+          {navItems.map((item) => {
             const isActive = currentPage === item.action;
             return (
-              <motion.button
+              <button
                 key={item.label}
                 type="button"
                 onClick={() => onNavigate(item.action)}
                 data-hover
-                className={`font-cinzel text-xs tracking-widest uppercase transition-colors duration-200 relative group ${isActive ? 'text-white' : 'text-white/60 hover:text-white'}`}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2.6 + i * 0.05 }}
+                className={`font-cinzel text-xs tracking-widest uppercase transition-colors duration-200 relative ${isActive ? 'text-white' : 'text-white/60 hover:text-white'}`}
               >
                 {item.label}
                 <span className="absolute bottom-0 left-0 w-0 h-px bg-red-600 group-hover:w-full transition-all duration-200" />
-              </motion.button>
+              </button>
             );
           })}
         </div>
@@ -88,11 +85,13 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
           className="w-8 h-8 rounded-lg overflow-hidden ring-2 ring-white/20 hover:ring-red-600 transition-all"
           whileHover={{ scale: 1.05 }}
         >
-          <img
-            src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?w=64&h=64&fit=crop"
-            alt="Profile"
-            className="w-full h-full object-cover"
-          />
+            <img
+              src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?w=64&h=64&fit=crop"
+              alt="Profile"
+              className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
         </motion.button>
       </div>
     </motion.nav>

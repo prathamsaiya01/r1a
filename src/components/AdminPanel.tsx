@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Lock, ImagePlus, Video, X, Plus, Trash2 } from 'lucide-react';
+import { Lock, ImagePlus, Video, X, Trash2 } from 'lucide-react';
 
 type GalleryItem = {
   id: number;
@@ -88,8 +88,6 @@ export default function AdminPanel({ items, onAddItem, onRemoveItem }: Props) {
     setLabel('');
     setError('Uploaded successfully.');
   };
-
-  const buttonText = unlocked ? 'Close admin panel' : 'Open admin panel';
 
   const customItems = useMemo(
     () => items.filter((item) => item.custom),

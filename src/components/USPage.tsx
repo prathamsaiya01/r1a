@@ -63,6 +63,7 @@ type QuizAnswers = {
 export default function USPage({ onBack }: Props) {
   const [quizType, setQuizType] = useState<'options' | 'words'>('options');
   const getQuestions = (type: 'options' | 'words') => (type === 'options' ? optionsQuestions : wordsQuestions);
+  const questions = getQuestions(quizType);
 
   const [stage, setStage] = useState<'gallery' | 'namePopup' | 'quiz' | 'results'>('gallery');
   const [currentUser, setCurrentUser] = useState<User>(null);
@@ -76,6 +77,7 @@ export default function USPage({ onBack }: Props) {
   const [quizAnswers, setQuizAnswers] = useState<QuizAnswers>(initAnswers('options'));
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [compatibility, setCompatibility] = useState(0);
+  const [wordAnswer, setWordAnswer] = useState('');
 
   const handleNameSubmit = () => {
     if (!nameInput.trim()) return;
@@ -182,7 +184,6 @@ export default function USPage({ onBack }: Props) {
 
   const calculateCompatibility = (answers: QuizAnswers, totalQuestions: number) => {
     let matches = 0;
-    const qList = getQuestions(quizType);
     for (let i = 0; i < totalQuestions; i++) {
       const a = answers.ria[i];
       const b = answers.pratham[i];
@@ -339,10 +340,10 @@ export default function USPage({ onBack }: Props) {
                   <p className="text-red-400 text-sm tracking-[0.3em] uppercase mb-2">
                     {userNames[currentUser]}'s Turn
                   </p>
-                  <h2 className="font-bebas text-3xl text-white">{quizQuestions[currentQuestion]}</h2>
+                  <h2 className="font-bebas text-3xl text-white">{questions[currentQuestion]}</h2>
                 </div>
                 <div className="text-right">
-                  <p className="text-white/60 text-sm">Question {currentQuestion + 1} of {quizQuestions.length}</p>
+                  <p className="text-white/60 text-sm">Question {currentQuestion + 1} of {questions.length}</p>
                 </div>
               </div>
 
@@ -350,7 +351,7 @@ export default function USPage({ onBack }: Props) {
               <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}
-                  animate={{ width: `${((currentQuestion + 1) / quizQuestions.length) * 100}%` }}
+                  animate={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
                   transition={{ duration: 0.3 }}
                   className="h-full bg-gradient-to-r from-red-600 to-red-500"
                 />
@@ -358,22 +359,56 @@ export default function USPage({ onBack }: Props) {
             </div>
 
             <div className="space-y-4">
-              {['ria', 'pratham'].map((option) => (
-                <motion.button
-                  key={option}
-                  type="button"
-                  onClick={() => handleQuizAnswer(option as 'ria' | 'pratham')}
-                  whileHover={{ scale: 1.02, x: 8 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`w-full rounded-xl border-2 p-4 text-left font-semibold text-lg tracking-[0.1em] uppercase transition-all duration-200 ${
-                    quizAnswers[currentUser][currentQuestion] === option
-                      ? 'border-red-500 bg-red-500/20 text-red-200'
-                      : 'border-white/20 bg-white/5 text-white hover:border-red-500/50 hover:bg-red-500/10'
-                  }`}
-                >
-                  {option === 'ria' ? userNames.ria || 'Ria' : userNames.pratham || 'Pratham'}
-                </motion.button>
-              ))}
+              {quizType === 'options' ? (
+                ['ria', 'pratham'].map((option) => (
+                  <motion.button
+                    key={option}
+                    type="button"
+                    onClick={() => handleQuizAnswer(option)}
+                    whileHover={{ scale: 1.02, x: 8 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`w-full rounded-xl border-2 p-4 text-left font-semibold text-lg tracking-[0.1em] uppercase transition-all duration-200 ${
+                      quizAnswers[currentUser][currentQuestion] === option
+                        ? 'border-red-500 bg-red-500/20 text-red-200'
+                        : 'border-white/20 bg-white/5 text-white hover:border-red-500/50 hover:bg-red-500/10'
+                    }`}
+                  >
+                    {option === 'ria' ? userNames.ria || 'Ria' : userNames.pratham || 'Pratham'}
+                  </motion.button>
+                ))
+              ) : (
+                <div className="space-y-4">
+                  <textarea
+                    value={wordAnswer}
+                    onChange={(e) => setWordAnswer(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (wordAnswer.trim()) {
+                          handleQuizAnswer(wordAnswer.trim());
+                          setWordAnswer('');
+                        }
+                      }
+                    }}
+                    rows={4}
+                    placeholder="Type your one-word answer here..."
+                    className="w-full rounded-xl border border-white/20 bg-black/30 px-4 py-4 text-white placeholder-white/40 focus:outline-none focus:border-red-500"
+                  />
+                  <motion.button
+                    type="button"
+                    onClick={() => {
+                      if (!wordAnswer.trim()) return;
+                      handleQuizAnswer(wordAnswer.trim());
+                      setWordAnswer('');
+                    }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full rounded-full bg-red-600 px-6 py-4 text-lg font-semibold uppercase tracking-[0.15em] text-white hover:bg-red-700 transition-colors"
+                  >
+                    Submit Answer
+                  </motion.button>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
@@ -408,8 +443,10 @@ export default function USPage({ onBack }: Props) {
             <div className="bg-black/40 border border-red-600/30 rounded-2xl p-8 mb-8">
               <h2 className="text-2xl font-semibold text-white mb-6">Where You Match</h2>
               <div className="space-y-3">
-                {quizQuestions.map((q, i) => {
-                  const match = quizAnswers.ria[i] === quizAnswers.pratham[i];
+                {questions.map((q, i) => {
+                  const match = quizType === 'words'
+                    ? isSimilar(quizAnswers.ria[i], quizAnswers.pratham[i])
+                    : quizAnswers.ria[i] === quizAnswers.pratham[i];
                   return (
                     <div
                       key={i}

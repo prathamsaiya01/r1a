@@ -15,6 +15,7 @@ import ShowcaseSection from './components/ShowcaseSection';
 import GallerySection from './components/GallerySection';
 import CreditsSection from './components/CreditsSection';
 import TimelineSection from './components/TimelineSection';
+import JigsawPuzzle from './components/JigsawPuzzle';
 import LoveNotesPage from './components/LoveNotesPage';
 import BirthdayPage from './components/BirthdayPage';
 import USPage from './components/USPage';
@@ -207,6 +208,8 @@ export default function App() {
                   <ShowcaseSection />
 
                   <GallerySection items={galleryItems} />
+
+                  <JigsawPuzzle />
 
                   <TimelineSection />
 

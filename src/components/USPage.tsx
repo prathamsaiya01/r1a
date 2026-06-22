@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import JigsawPuzzle from './JigsawPuzzle';
 
 type Props = {
   onBack: () => void;
@@ -258,6 +259,8 @@ export default function USPage({ onBack }: Props) {
                 </motion.div>
               ))}
             </div>
+
+            <JigsawPuzzle />
 
             <motion.button
               type="button"

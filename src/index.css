@@ -131,3 +131,163 @@ html.lenis { height: auto; }
   pointer-events: none;
 }
 
+.puzzle-hero-bg {
+  background: radial-gradient(circle at top, rgba(255, 216, 166, 0.12), transparent 16%),
+    radial-gradient(circle at 80% 8%, rgba(255, 186, 118, 0.16), transparent 14%),
+    linear-gradient(180deg, #040306 0%, #13050a 28%, #26080e 100%);
+}
+
+.puzzle-piece {
+  position: absolute;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  cursor: grab;
+  box-shadow: 0 22px 72px rgba(0, 0, 0, 0.42);
+  transition: box-shadow 0.25s ease, transform 0.2s ease, filter 0.25s ease;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.puzzle-piece:active {
+  cursor: grabbing;
+}
+
+.puzzle-piece.placed {
+  border-color: rgba(255, 214, 150, 0.45);
+  box-shadow: 0 28px 110px rgba(255, 190, 115, 0.25), inset 0 0 14px rgba(255, 225, 180, 0.12);
+}
+
+.puzzle-piece::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 55%);
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.puzzle-piece-glow {
+  position: absolute;
+  inset: -8%;
+  border-radius: 24px;
+  box-shadow: 0 0 36px rgba(255, 200, 115, 0.45), inset 0 0 42px rgba(255, 235, 200, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.puzzle-piece.placed .puzzle-piece-glow {
+  opacity: 1;
+}
+
+.puzzle-progress {
+  position: relative;
+  z-index: 20;
+}
+
+.puzzle-progress-bar {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.puzzle-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 210, 145, 0.95), rgba(255, 135, 70, 0.96));
+  border-radius: 999px;
+}
+
+.puzzle-heart,
+.puzzle-spark {
+  position: absolute;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  z-index: 5;
+}
+
+.puzzle-heart {
+  animation-name: heartRise;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+}
+
+@keyframes heartRise {
+  0% {
+    transform: translateY(0) scale(0.65);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.82;
+  }
+  100% {
+    transform: translateY(-240px) scale(1.15);
+    opacity: 0;
+  }
+}
+
+.puzzle-spark {
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 236, 171, 0.95), rgba(255, 164, 75, 0.24));
+  animation-name: sparkFloat;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes sparkFloat {
+  0% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-42px) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-84px) scale(0.95);
+    opacity: 0;
+  }
+}
+
+.puzzle-sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 0%, rgba(255, 235, 190, 0.18) 46%, transparent 100%);
+  transform: translateX(-120%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.puzzle-completion {
+  position: absolute;
+  inset: 0;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(8, 4, 14, 0.7);
+  backdrop-filter: blur(6px);
+}
+
+.puzzle-completion h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: 0.02em;
+  color: #fff;
+  text-shadow: 0 0 28px rgba(255, 205, 130, 0.38), 0 0 68px rgba(255, 145, 85, 0.16);
+}
+
+.puzzle-completion p {
+  margin-top: 1.2rem;
+  color: rgba(255, 241, 220, 0.85);
+  font-size: 1rem;
+  max-width: 720px;
+  line-height: 1.7;
+}
+
